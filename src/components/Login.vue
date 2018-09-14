@@ -10,6 +10,7 @@
     export default {
         methods: {
             login(){
+                _hmt.push(["eventName","login","xxx","sdfsfd"])
                 let username = this.$refs.username.value,
                     password = this.$refs.password.value;
                 if (username == 'ylinlin' && password == '545426'){
