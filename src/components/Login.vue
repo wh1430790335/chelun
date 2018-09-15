@@ -10,10 +10,9 @@
     export default {
         methods: {
             login(){
-                _hmt.push(["eventName","login","xxx","sdfsfd"])
                 let username = this.$refs.username.value,
                     password = this.$refs.password.value;
-                if (username == 'ylinlin' && password == '545426'){
+                if (username == '1602E' && password == '1602E'){
                     window.localStorage.setItem('login', 'true');
                     window.history.back();
                 }

@@ -6,7 +6,7 @@
                     <ul>
                         <p :id="index">{{index}}</p>
                         <li v-for="(value, key) in item" :key="key" @click="getMakeList(value.MasterID)">
-                            <img :data-src="value.CoverPhoto">
+                            <img :data-src="value.CoverPhoto" src="../assets/black.jpg">
                             <span>{{value.Name}}</span>
                         </li>
                     </ul>
@@ -24,41 +24,45 @@
 </template>
 
 <script>
-import {mapState, mapActions, mapMutations} from 'vuex';
-import MakeList from './common/makeList';
-import lazyLoad from '../util/lazyLoad.js';
-import '../util/util.js';
-export default {
-    computed: {
-		...mapState({
-			letters: state=>state.index.letters,
-            brand: state=>state.index.brand,
-            letter: state=>state.index.letter,
-            isShow: state=>state.index.isShow
-		})
-    },
-    components: {
-        MakeList
-    },
-	methods: {
-		...mapActions({
-            initState:'index/initState',
-            getMakeList: 'index/getMakeList'
-        }),
-        ...mapMutations({
+    import {
+        mapState,
+        mapActions,
+        mapMutations
+    } from 'vuex';
+    import MakeList from './common/makeList';
+    import lazyLoad from '../util/lazyLoad.js';
+    import '../util/util.js';
+    export default {
+        computed: {
+            ...mapState({
+                letters: state => state.index.letters,
+                brand: state => state.index.brand,
+                letter: state=>state.index.letter,
+                isShow: state=>state.index.isShow
+            })
+        },
+        components: {
+            MakeList,
+        },
+        methods: {
+            ...mapActions({
+                initState: 'index/initState',
+                getMakeList: 'index/getMakeList'
+            }),
+            ...mapMutations({
                 showLetter: 'index/showLetter',
                 changeLetter: 'index/changeLetter'
-        }),
-		touchStart(e){
-            this.showLetter(true);
-            let letter = e.target.innerHTML;
-            console.log('letter...', letter, e.target);
-            if (this.letter != letter){
+            }),
+            touchStart(e) {
+                this.showLetter(true);
+                let letter = e.target.innerHTML;
+                console.log('letter...', letter, e.target,);
+                 if (this.letter != letter){
                     // 改变当前字母
-                this.changeLetter(letter);
-            }
-		},
-		touchMove(e) {
+                    this.changeLetter(letter);
+                 }
+            },
+            touchMove(e) {
                 console.log(e.touches);
                 // 获取手指的位置
                 let pageY = e.touches[0].pageY;
@@ -112,13 +116,15 @@ export default {
                     var opts = obj || {};
                     offset = opts.offset || 0;
                     throttle = opts.throttle || 250;
+
                     for (var i = 0; i < nodes.length; i++) {
                         store.push(nodes[i]);
                     }
                     _throttle();
-                    //  let ele1 = document.getElementById('list');
+
+                     let ele1 = document.getElementById('list');
                     // ele1.addEventListener('scroll', _throttle, false);
-                    document.body.addEventListener('scroll', _throttle, false);
+                    // document.body.addEventListener('scroll', _throttle, false);
                 })();
             },
         },
@@ -130,24 +136,22 @@ export default {
             this.height = 0.4 * window.innerWidth / 750 * 100;
             // 获取字母列表距离顶部的高度
             this.marginTop = (window.innerHeight - (this.letters.length) * this.height) / 2;
-            if (Object.entries(this.brand).length){
-                this.updateLazy();
-            }
+            // if (Object.entries(this.brand).length){
+                // this.updateLazy();
+            // }
+            lazyLoad('.wrap');
         },
     }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
- .index{
-        height:100%;
-    }
-    .wrap{
+    .index {
         height: 100%;
-        overflow:hidden;
     }
-
-    aside{
+    .wrap {
+        height: 100%;
+        overflow: scroll;
+    }
+    aside {
         position: fixed;
         top: 50%;
         right: .1rem;
@@ -155,7 +159,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        span{
+        span {
             font-size: .24rem;
             color: #666;
             font-weight: 500;
@@ -164,15 +168,15 @@ export default {
             box-sizing: border-box;
         }
     }
-    ul{
-        p{
+    ul {
+        p {
             font-size: .28rem;
             line-height: .4rem;
             background: #f4f4f4;
             padding-left: .3rem;
             color: #aaa;
         }
-        li{
+        li {
             margin: 0 .3rem;
             height: 1rem;
             box-sizing: border-box;
@@ -180,15 +184,16 @@ export default {
             display: flex;
             align-items: center;
         }
-        li>img{
+        img {
             height: .8rem;
+            width: .8rem;
         }
-        li>span{
+        span {
             font-size: .32rem;
             margin-left: .4rem;
         }
     }
-     .letter{
+    .letter{
         position: fixed;
         top: 50%;
         left: 50%;
@@ -202,5 +207,4 @@ export default {
         text-align: center;
         line-height: 2rem;
     }
-    
 </style>

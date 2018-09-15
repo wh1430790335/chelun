@@ -1,18 +1,13 @@
 import {getBrandList, getMakeList} from '../../api/index';
-// 数据区域
+
 let state = {
-    letters:[],
-    brand: {},
-    letter:'',
-    isShow: false,
-    brandId:'',
-    makeList:'',
-    isShowList: false
-}
-
-// 派生数据区域
-let getters = {
-
+    letters: [],    // 匹配字母列表
+    brand: {},      // 品牌列表
+    letter: '',     // 当前选中的品牌字母
+    isShow: false,  // 是否显示字母弹框
+    brandId: '',     // 品牌id
+    makeList: '',    // 车系列表
+    isShowList: false   //是否显示车系
 }
 
 let mutations = {
@@ -54,6 +49,10 @@ let mutations = {
     // 隐藏车系数据
     hideMakeList: (state)=>{
         state.isShowList = false;
+    },
+    // 显示车系数据
+    showMakeList: (state)=>{
+        state.isShowList = true;
     }
 }
 
@@ -70,6 +69,8 @@ let actions = {
         })
     },
     getMakeList: ({commit, state}, payload)=>{
+        // 单点统计的代码
+        _hmt.push(['_trackEvent', '点击了品牌', 'tap', payload]);
         if (payload != state.brandId){
             console.log('id...', payload);
             getMakeList(payload).then(body=>{
@@ -79,14 +80,16 @@ let actions = {
                     list: body.data
                 })
             })
+        }else if (!state.isShowList){
+            commit('showMakeList');
         }
     }
 }
 
+
 export default {
     namespaced: true,
     state,
-    //getters,
     mutations,
     actions
 }
