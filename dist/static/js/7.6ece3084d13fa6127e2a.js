@@ -1,0 +1,2 @@
+webpackJsonp([7],{"3rbB":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r={render:function(){var e=this.$createElement;return(this._self._c||e)("p",[this._v("颜色选择页面")])},staticRenderFns:[]},l=n("C7Lr")(null,r,!1,null,null,null);t.default=l.exports}});
+//# sourceMappingURL=7.6ece3084d13fa6127e2a.js.map

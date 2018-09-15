@@ -1,0 +1,2 @@
+webpackJsonp([6],{b0ui:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var l={render:function(){var e=this.$createElement;return(this._self._c||e)("p",[this._v("图片页面")])},staticRenderFns:[]},r=n("C7Lr")(null,l,!1,null,null,null);t.default=r.exports}});
+//# sourceMappingURL=6.72df9ac314f6c5dbce60.js.map
